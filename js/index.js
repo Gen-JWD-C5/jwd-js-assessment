@@ -24,8 +24,22 @@ window.addEventListener('DOMContentLoaded', () => {
   start.addEventListener('click', function (e) {
     document.querySelector('#quizBlock').style.display = 'block';
     start.style.display = 'none';
-//     let resetBtn = document.querySelector("#btnReset");
-// resetBtn.onclick = window.location.reload();
+    //add timer to display answers after 1 minute
+  const startTime = 1; // set time (in minutes) for countdown
+  let time = startTime * 60;
+  const countDownTimer = document.querySelector("#time");
+
+  setInterval(updateCountdown, 1000);  // call the updateCountdown function every second
+  setTimeout(60000, calculateScore);
+  function updateCountdown(){
+   let minutes = Math.floor(time / 60);// return the lowest number without decimals
+   let seconds = time % 60; // all seconds remaining after the division
+   minutes = minutes < 10 ? `0${minutes}` : `${minutes}`; // if minutes are less than 10, then put a 0 infront if it
+   seconds = seconds < 10 ? `0${seconds}` : `${seconds}`;
+   countDownTimer.innerHTML = `${minutes}: ${seconds}`;  // display time
+   time--;
+
+ }
   });
 
   // quizArray QUESTIONS & ANSWERS
@@ -115,21 +129,7 @@ window.addEventListener('DOMContentLoaded', () => {
   submitBtn.addEventListener("click", calculateScore);
 
 
-  //add timer to display answers after 1 minute
-  const startTime = 1; // set time (in minutes) for countdown
-  let time = startTime * 60;
-  const countDownTimer = document.querySelector("#time");
-
-  setInterval(updateCountdown, 1000);  // call the updateCountdown function every second
- 
-  function updateCountdown(){
-   let minutes = Math.floor(time / 60);// return the lowest number without decimals
-   let seconds = time % 60; // all seconds remaining after the division
-   minutes = minutes < 10 ? `0${minutes}` : `${minutes}`; // if minutes are less than 10, then put a 0 infront if it
-   seconds = seconds < 10 ? `0${seconds}` : `${seconds}`;
-   countDownTimer.innerHTML = `${minutes}: ${seconds}`;  // display time
-   time--;
- }
+  
 
 //display answers after a minute calling the calculateScore function
   window.setTimeout(calculateScore, 60000);
