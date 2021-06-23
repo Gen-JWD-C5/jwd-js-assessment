@@ -24,13 +24,33 @@ window.addEventListener('DOMContentLoaded', () => {
   start.addEventListener('click', function (e) {
     document.querySelector('#quizBlock').style.display = 'block';
     start.style.display = 'none';
-    //add timer to display answers after 1 minute
+
+    //get button for submit
+  let submitBtn = document.querySelector("#btnSubmit");
+  // add funtion to submit button to execute on click
+  submitBtn.addEventListener("click", calculateScore);
+  
+ 
+  // get button for reset
+  let resetBtn = document.querySelector("#btnReset");
+  // create function to reset page
+  function reset(){
+    window.location.reload();
+  }
+  // add funtion to reset button to execute on click
+  resetBtn.addEventListener("click", reset);
+    
+   
+  //add timer to display answers after 1 minute
   const startTime = 1; // set time (in minutes) for countdown
   let time = startTime * 60;
   const countDownTimer = document.querySelector("#time");
 
-  setInterval(updateCountdown, 1000);  // call the updateCountdown function every second
-  setTimeout(60000, calculateScore);
+  let showTimer = setInterval(updateCountdown, 1000);  // call the updateCountdown function every second
+  // after 1 minute, trigger calculateScore function
+  setTimeout(calculateScore, 60000);
+
+  // function to create and display countdown timer
   function updateCountdown(){
    let minutes = Math.floor(time / 60);// return the lowest number without decimals
    let seconds = time % 60; // all seconds remaining after the division
@@ -38,8 +58,14 @@ window.addEventListener('DOMContentLoaded', () => {
    seconds = seconds < 10 ? `0${seconds}` : `${seconds}`;
    countDownTimer.innerHTML = `${minutes}: ${seconds}`;  // display time
    time--;
-
  }
+// add functionality to stop timer
+ function stopTimer() {
+   clearInterval(showTimer);
+ }
+ // target submit button to stop timer on click
+ submitBtn.addEventListener("click", stopTimer); 
+
   });
 
   // quizArray QUESTIONS & ANSWERS
@@ -118,34 +144,13 @@ window.addEventListener('DOMContentLoaded', () => {
       }
       
     });
-    
+   
   };
-
+  
   // call the displayQuiz function
   displayQuiz();
-  //get button for submit
-  let submitBtn = document.querySelector("#btnSubmit");
-  // add funtion to submit button to execute on click
-  submitBtn.addEventListener("click", calculateScore);
-
-
   
-
-//display answers after a minute calling the calculateScore function
-  window.setTimeout(calculateScore, 60000);
-
-
-  // get button for reset
-  let resetBtn = document.querySelector("#btnReset");
-  // create function to reset page
-  function reset(){
-    window.location.reload();
-  }
-  // add funtion to reset button to execute on click
-  resetBtn.addEventListener("click", reset);
-
- 
-
+  
 });
 
 
