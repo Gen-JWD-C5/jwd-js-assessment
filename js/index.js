@@ -24,7 +24,10 @@ window.addEventListener('DOMContentLoaded', () => {
   start.addEventListener('click', function (e) {
     document.querySelector('#quizBlock').style.display = 'block';
     start.style.display = 'none';
+//     let resetBtn = document.querySelector("#btnReset");
+// resetBtn.onclick = window.location.reload();
   });
+
   // quizArray QUESTIONS & ANSWERS
   // q = QUESTION, o = OPTIONS, a = CORRECT ANSWER
   // Basic ideas from https://code-boxx.com/simple-javascript-quiz/
@@ -43,6 +46,16 @@ window.addEventListener('DOMContentLoaded', () => {
       q: 'What is the capital of Australia',
       o: ['Sydney', 'Canberra', 'Melbourne', 'Perth'],
       a: 1,
+    },
+    {
+      q: 'What is the largest continent',
+      o: ['Africa', 'South America', 'Asia', 'North America'],
+      a: 2,
+    },
+    {
+      q: 'What is the amallest country in the world',
+      o: ['Vatican City', 'Monaco', 'Nauru', 'San Marino'],
+      a: 0,
     },
   ];
 
@@ -73,18 +86,69 @@ window.addEventListener('DOMContentLoaded', () => {
         let r = `radio_${index}_${i}`;
         liElement = document.querySelector('#' + li);
         radioElement = document.querySelector('#' + r);
+        //get container to display score
+        let resultsContainer = document.querySelector("#score");
 
         if (quizItem.a == i) {
           //change background color of li element here
+          liElement.style.background = "lightgreen";
         }
 
         if (radioElement.checked) {
           // code for task 1 goes here
+          if(quizItem.a === i){
+          score++;
+          }
         }
+        resultsContainer.innerHTML = `${score} out of ${quizArray.length}`;
       }
+      
     });
+    
   };
 
   // call the displayQuiz function
   displayQuiz();
+  //get button for submit
+  let submitBtn = document.querySelector("#btnSubmit");
+  // add funtion to submit button to execute on click
+  submitBtn.addEventListener("click", calculateScore);
+
+
+  //add timer to display answers after 1 minute
+  const startTime = 1; // set time (in minutes) for countdown
+  let time = startTime * 60;
+  const countDownTimer = document.querySelector("#time");
+
+  setInterval(updateCountdown, 1000);  // call the updateCountdown function every second
+ 
+  function updateCountdown(){
+   let minutes = Math.floor(time / 60);// return the lowest number without decimals
+   let seconds = time % 60; // all seconds remaining after the division
+   minutes = minutes < 10 ? `0${minutes}` : `${minutes}`; // if minutes are less than 10, then put a 0 infront if it
+   seconds = seconds < 10 ? `0${seconds}` : `${seconds}`;
+   countDownTimer.innerHTML = `${minutes}: ${seconds}`;  // display time
+   time--;
+ }
+
+//display answers after a minute calling the calculateScore function
+  window.setTimeout(calculateScore, 60000);
+
+
+  // get button for reset
+  let resetBtn = document.querySelector("#btnReset");
+  // create function to reset page
+  function reset(){
+    window.location.reload();
+  }
+  // add funtion to reset button to execute on click
+  resetBtn.addEventListener("click", reset);
+
+ 
+
 });
+
+
+
+
+
