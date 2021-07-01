@@ -27,7 +27,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     //get button for submit
   let submitBtn = document.querySelector("#btnSubmit");
-  // add funtion to submit button to execute on click
+  // add function to submit button to execute on click
   submitBtn.addEventListener("click", calculateScore);
   
  
@@ -35,9 +35,9 @@ window.addEventListener('DOMContentLoaded', () => {
   let resetBtn = document.querySelector("#btnReset");
   // create function to reset page
   function reset(){
-    window.location.reload();
+    location.reload();
   }
-  // add funtion to reset button to execute on click
+  // add function to reset button to execute on click
   resetBtn.addEventListener("click", reset);
     
    
@@ -52,12 +52,16 @@ window.addEventListener('DOMContentLoaded', () => {
 
   // function to create and display countdown timer
   function updateCountdown(){
+    if (time > 0) {
    let minutes = Math.floor(time / 60);// return the lowest number without decimals
    let seconds = time % 60; // all seconds remaining after the division
    minutes = minutes < 10 ? `0${minutes}` : `${minutes}`; // if minutes are less than 10, then put a 0 infront if it
    seconds = seconds < 10 ? `0${seconds}` : `${seconds}`;
-   countDownTimer.innerHTML = `${minutes}: ${seconds}`;  // display time
+   countDownTimer.innerHTML = `${minutes}:${seconds}`;  // display time
    time--;
+    } else {
+     countDownTimer.innerHTML = '00:00';
+   }
  }
 // add functionality to stop timer
  function stopTimer() {
@@ -93,7 +97,7 @@ window.addEventListener('DOMContentLoaded', () => {
       a: 2,
     },
     {
-      q: 'What is the amallest country in the world',
+      q: 'What is the smallest country in the world',
       o: ['Vatican City', 'Monaco', 'Nauru', 'San Marino'],
       a: 0,
     },
@@ -106,10 +110,10 @@ window.addEventListener('DOMContentLoaded', () => {
     quizArray.map((quizItem, index) => {
       quizDisplay += `<ul class="list-group">
                    Q - ${quizItem.q}
-                    <li class="list-group-item mt-2" id="li_${index}_0"><input type="radio" name="radio${index}" id="radio_${index}_0"> ${quizItem.o[0]}</li>
-                    <li class="list-group-item" id="li_${index}_1"><input type="radio" name="radio${index}" id="radio_${index}_1"> ${quizItem.o[1]}</li>
-                    <li class="list-group-item"  id="li_${index}_2"><input type="radio" name="radio${index}" id="radio_${index}_2"> ${quizItem.o[2]}</li>
-                    <li class="list-group-item"  id="li_${index}_3"><input type="radio" name="radio${index}" id="radio_${index}_3"> ${quizItem.o[3]}</li>
+                    <label><li class="list-group-item mt-2" id="li_${index}_0"><input type="radio" name="radio${index}" id="radio_${index}_0"> ${quizItem.o[0]}</li></label>
+                    <label><li class="list-group-item" id="li_${index}_1"><input type="radio" name="radio${index}" id="radio_${index}_1"> ${quizItem.o[1]}</li></label>
+                    <label><li class="list-group-item"  id="li_${index}_2"><input type="radio" name="radio${index}" id="radio_${index}_2"> ${quizItem.o[2]}</li></label>
+                    <label><li class="list-group-item"  id="li_${index}_3"><input type="radio" name="radio${index}" id="radio_${index}_3"> ${quizItem.o[3]}</li></label>
                     </ul>
                     <div>&nbsp;</div>`;
       quizWrap.innerHTML = quizDisplay;
