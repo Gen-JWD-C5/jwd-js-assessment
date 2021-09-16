@@ -18,3 +18,6 @@ Complete the following tasks:
 
 The assessment must be completed by 2pm. When you have finished, upload your work to GitHub Pages and share the link with your
 pod instructor by DM on Slack.
+
+
+https://gen-jwd-c5.github.io/jwd-js-assessment/
