@@ -18,6 +18,9 @@
 
       5. Add a countdown timer - when the time is up, end the quiz, display the score and highlight the correct answers
 *************************** */
+const startTime = 1; // set time (in minutes) for countdown
+let quizTime = document.querySelector("#quiztime");
+quizTime.innerHTML = `${startTime}`;
 
 window.addEventListener('DOMContentLoaded', () => {
   const start = document.querySelector('#start');
@@ -40,15 +43,16 @@ window.addEventListener('DOMContentLoaded', () => {
   // add function to reset button to execute on click
   resetBtn.addEventListener("click", reset);
     
-   
+  
+  
+
   //add timer to display answers after 1 minute
-  const startTime = 1; // set time (in minutes) for countdown
   let time = startTime * 60;
   const countDownTimer = document.querySelector("#time");
-
+    
   let showTimer = setInterval(updateCountdown, 1000);  // call the updateCountdown function every second
   // after 1 minute, trigger calculateScore function
-  setTimeout(calculateScore, 60000);
+  setTimeout(calculateScore, time*1000);
 
   // function to create and display countdown timer
   function updateCountdown(){
@@ -60,7 +64,7 @@ window.addEventListener('DOMContentLoaded', () => {
    countDownTimer.innerHTML = `${minutes}:${seconds}`;  // display time
    time--;
     } else {
-     countDownTimer.innerHTML = '00:00';
+     countDownTimer.innerHTML = '00:00';     
    }
  }
 // add functionality to stop timer
