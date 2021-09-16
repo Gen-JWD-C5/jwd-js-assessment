@@ -18,7 +18,7 @@
 
       5. Add a countdown timer - when the time is up, end the quiz, display the score and highlight the correct answers
 *************************** */
-const startTime = 1; // set time (in minutes) for countdown
+const startTime = 1 ; // set time (in minutes) for countdown
 let quizTime = document.querySelector("#quiztime");
 quizTime.innerHTML = `${startTime}`;
 
@@ -44,8 +44,6 @@ window.addEventListener('DOMContentLoaded', () => {
   resetBtn.addEventListener("click", reset);
     
   
-  
-
   //add timer to display answers after 1 minute
   let time = startTime * 60;
   const countDownTimer = document.querySelector("#time");
@@ -137,7 +135,7 @@ window.addEventListener('DOMContentLoaded', () => {
         //get container to display score
         let resultsContainer = document.querySelector("#score");
 
-        if (quizItem.a == i) {
+        if (quizItem.a == i) { // if the answer is the same as the options index number
           //change background color of li element here
           liElement.style.background = "lightgreen";
         }
@@ -146,6 +144,8 @@ window.addEventListener('DOMContentLoaded', () => {
           // code for task 1 goes here
           if(quizItem.a === i){
           score++;
+          } else {
+            liElement.style.background = "red";
           }
         }
         resultsContainer.innerHTML = `${score} out of ${quizArray.length}`;
